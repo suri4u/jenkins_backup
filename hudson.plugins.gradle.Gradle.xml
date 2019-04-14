@@ -1,0 +1,11 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<hudson.plugins.gradle.Gradle_-DescriptorImpl plugin="gradle@1.30">
+  <installations>
+    <hudson.plugins.gradle.GradleInstallation>
+      <name>GRADLE 4.6</name>
+      <home>/home/suri/Downloads/gradle-4.6-bin/gradle-4.6</home>
+      <properties/>
+      <gradleHome>/home/suri/Downloads/gradle-4.6-bin/gradle-4.6</gradleHome>
+    </hudson.plugins.gradle.GradleInstallation>
+  </installations>
+</hudson.plugins.gradle.Gradle_-DescriptorImpl>

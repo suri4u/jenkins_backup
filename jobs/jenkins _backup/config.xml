@@ -1,0 +1,43 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <scm class="hudson.scm.NullSCM"/>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <jdk>(System)</jdk>
+  <triggers>
+    <hudson.triggers.SCMTrigger>
+      <spec>* * * * * </spec>
+      <ignorePostCommitHooks>false</ignorePostCommitHooks>
+    </hudson.triggers.SCMTrigger>
+  </triggers>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>#!/bin/sh -e
+
+cd &quot;$JENKINS_HOME&quot;
+
+# Add general configurations, secrets, job configurations, nodes, user content, users and plugins info:
+ls -1d *.xml secrets/ jobs/*/*.xml nodes/*/*.xml userContent/* users/*/config.xml \
+    plugins/*/META-INF/MANIFEST.MF 2&gt;/dev/null | grep -v &apos;^queue.xml$&apos; | xargs -r -d &apos;\n&apos; git add --
+
+# Track deleted files:
+LANG=C git status | awk &apos;$1 == &quot;deleted:&quot; { print $2; }&apos; | xargs -r git rm --ignore-unmatch
+
+LANG=C git status | grep -q &apos;^nothing to commit&apos; || {
+    git commit -m &quot;Automated Jenkins commit at $(date &apos;+%Y-%m-%d %H:%M&apos;)&quot;
+    git push -q -u origin master
+}
+
+## END ##</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers/>
+  <buildWrappers/>
+</project>

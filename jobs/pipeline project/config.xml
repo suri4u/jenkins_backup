@@ -1,0 +1,24 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<flow-definition plugin="workflow-job@2.31">
+  <actions/>
+  <description>hi</description>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@2.63">
+    <script>node {
+   
+   stage(&apos;cllonig&apos;) { 
+     
+      git &apos;https://github.com/jglick/simple-maven-project-with-tests.git&apos;
+   } 
+stage(&apos;build&apos;){
+    sh &apos;/home/suri/distros/apache-maven-3.6.0/bin/mvn install&apos;
+}
+}
+    
+}</script>
+    <sandbox>true</sandbox>
+  </definition>
+  <triggers/>
+  <disabled>false</disabled>
+</flow-definition>

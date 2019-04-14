@@ -1,0 +1,46 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<slave>
+  <name>slave</name>
+  <description></description>
+  <remoteFS>/home/suri/workspace</remoteFS>
+  <numExecutors>1</numExecutors>
+  <mode>NORMAL</mode>
+  <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+  <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.29.4">
+    <host>172.17.0.2</host>
+    <port>22</port>
+    <credentialsId>id</credentialsId>
+    <launchTimeoutSeconds>210</launchTimeoutSeconds>
+    <maxNumRetries>10</maxNumRetries>
+    <retryWaitTime>15</retryWaitTime>
+    <sshHostKeyVerificationStrategy class="hudson.plugins.sshslaves.verifiers.NonVerifyingKeyVerificationStrategy"/>
+    <tcpNoDelay>true</tcpNoDelay>
+  </launcher>
+  <label>darlling</label>
+  <nodeProperties>
+    <hudson.slaves.EnvironmentVariablesNodeProperty>
+      <envVars serialization="custom">
+        <unserializable-parents/>
+        <tree-map>
+          <default>
+            <comparator class="hudson.util.CaseInsensitiveComparator"/>
+          </default>
+          <int>2</int>
+          <string>JAVA_HOME</string>
+          <string>/home/suri/jdk1.8.0_201</string>
+          <string>M2_HOME</string>
+          <string>/home/suri/apache-maven-3.6.0</string>
+        </tree-map>
+      </envVars>
+    </hudson.slaves.EnvironmentVariablesNodeProperty>
+    <hudson.tools.ToolLocationNodeProperty>
+      <locations>
+        <hudson.tools.ToolLocationNodeProperty_-ToolLocation>
+          <type>hudson.tasks.Maven$MavenInstallation$DescriptorImpl</type>
+          <name>maven 3.6.0</name>
+          <home>/home/suri/apache-maven-3.6.0</home>
+        </hudson.tools.ToolLocationNodeProperty_-ToolLocation>
+      </locations>
+    </hudson.tools.ToolLocationNodeProperty>
+  </nodeProperties>
+</slave>
